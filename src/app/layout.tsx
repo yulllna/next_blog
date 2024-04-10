@@ -24,14 +24,14 @@ export default function RootLayout({
         <header className="py-2 px-4 flex justify-between align-center">
           <p className="font-bold text-2xl text-slate-800"><Link href='/'>Yuri's Blog✨</Link></p>
           <nav className="gap-x-3 flex text-slate-800">
-            <Link href='/home'>home</Link>
+            <Link href='/'>home</Link>
             <Link href='/about'>about</Link>
             <Link href='/posts'>posts</Link>
             <Link href='/contact'>contact</Link>
           </nav>
         </header>
-        <main>{children}</main>
-        <footer>© 2024 yuri. All Right Reserved.</footer>
+        <main className="h-screen">{children}</main>
+        <footer className="bg-blue-950 text-white text-xs text-center">© 2024 yuri. All Right Reserved.</footer>
       </body>
     </html>
   );
