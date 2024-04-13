@@ -10,7 +10,7 @@ export type Post = {
     featured: boolean
 }
 export async function getPosts(): Promise<Post[]> {
-    const filePath = path.join(process.cwd(), 'data', 'posts.json');
+    const filePath = path.join(process.cwd(), 'public/data', 'posts.json');
     const data = await fs.readFile(filePath, 'utf-8')
     return JSON.parse(data);
 }
@@ -18,4 +18,9 @@ export async function getPosts(): Promise<Post[]> {
 export async function getFeaturedPosts(featured: Boolean):Promise<Post[]> {
     const posts = await getPosts();
     return posts.filter((post) => post.featured === featured)
-}  
+}
+
+export async function getTargetPost(targetPath: String):Promise<Post> {
+    const posts = await getPosts();
+    return posts.filter((post) => post.path === targetPath)[0]
+}

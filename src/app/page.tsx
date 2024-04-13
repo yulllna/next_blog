@@ -1,7 +1,7 @@
 // import Image from "next/image";
-import Introduce from './components/Introduce';
-import Posts from './components/Posts';
-import PostsSlide from './components/PostsSlide';
+import Introduce from '../components/Introduce';
+import Posts from '../components/Posts';
+import PostsSlide from '../components/PostsSlide';
 import { getFeaturedPosts } from '@/service/posts';
 
 export default async function Home() {

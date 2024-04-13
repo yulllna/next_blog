@@ -1,6 +1,6 @@
 import React from 'react';
 import PostBox from './PostBox';
-import { Post } from '../../service/posts'
+import { Post } from '../service/posts'
 
 interface PostsProps {
     posts: Post[];
