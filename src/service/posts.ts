@@ -15,12 +15,12 @@ export async function getPosts(): Promise<Post[]> {
     return JSON.parse(data);
 }
 
-export async function getFeaturedPosts(featured: Boolean):Promise<Post[]> {
+export async function getFeaturedPosts(featured: boolean):Promise<Post[]> {
     const posts = await getPosts();
     return posts.filter((post) => post.featured === featured)
 }
 
-export async function getTargetPost(targetPath: String):Promise<Post> {
+export async function getTargetPost(targetPath: string):Promise<Post> {
     const posts = await getPosts();
     return posts.filter((post) => post.path === targetPath)[0]
 }
