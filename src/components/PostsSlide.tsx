@@ -1,6 +1,7 @@
 import React from 'react';
 import PostBox from './PostBox';
 import { Post } from '../service/posts'
+import MultiCarousel from './multiCarousel';
 
 interface PostsProps {
     posts: Post[] | Post;
@@ -12,15 +13,17 @@ const PostsSlide = ({ posts }: PostsProps) => {
     
 
     return (
-        <div className='overflow-scroll'>
-            <ul className='flex flex-nowrap gap-x-4 w-full'>
-            {postArray.map((item, index) => (
-                    <li className='w-1/2' key={index}>
-                        <PostBox postData={item} />
-                    </li>
-                ))}
-            </ul>
-        </div>
+        // <div className='overflow-scroll'>
+        //     <ul className='flex flex-nowrap gap-x-4 w-full'>
+                <MultiCarousel>
+                    {postArray.map((item, index) => (
+                        <div className='w-full' key={index}>
+                            <PostBox postData={item} />
+                        </div>
+                    ))}
+                </MultiCarousel>
+        //     </ul>
+        // </div>
     );
 };
 

@@ -8,9 +8,9 @@ interface PostsProps {
 
 const Posts = ({ posts } : PostsProps) => {
     return (
-        <ul className='flex flex-wrap'>
+        <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
             {posts.map((item, index) => {
-                return <li className='w-1/3 pr-4 pb-4' key={index}>
+                return <li className='w-full pb-4' key={item.path}>
                     <PostBox postData={item}/>
                 </li>
             })}

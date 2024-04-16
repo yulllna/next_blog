@@ -40,8 +40,8 @@ export default function RootLayout({
             <Link href='/contact'>contact</Link>
           </nav>
         </header>
-        <main className="h-screen">{children}</main>
-        <footer className="bg-blue-950 text-white text-xs text-center">© 2024 yuri. All Right Reserved.</footer>
+        <main>{children}</main>
+        <div className="bg-blue-950 text-white text-xs text-center">© 2024 yuri. All Right Reserved.</div>
       </body>
     </html>
   );
