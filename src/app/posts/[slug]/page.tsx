@@ -1,12 +1,12 @@
 // import { notFound, redirect } from 'next/navigation';
 import PostMarkdownArea from "@/components/PostMarkdownArea";
-import { getTargetPost } from "@/service/posts";
+import { getPostData } from "@/service/posts";
 import Image from "next/image";
 import { MdOutlineDateRange } from "react-icons/md";
 
 type Props = {
   params: {
-    slug: String;
+    slug: string;
   }
 }
 
@@ -17,7 +17,7 @@ export function generateMetadata({ params }: Props) {
 }
 
 export default async function postsPage({ params: {slug} }: Props) {
-  const post = await getTargetPost(slug);
+  const post = await getPostData(slug);
   
   return (
     <>
@@ -31,10 +31,9 @@ export default async function postsPage({ params: {slug} }: Props) {
             <p className="font-bold text-4xl pb-2">{post.title}</p>
             <p className="text-gray-800">{post.description}</p>
             <hr className="w-1/4 h-1 my-6 bg-blue-800" />
-            <PostMarkdownArea path={post.path} />
+            <PostMarkdownArea content={post.content} />
           </div>
         </div>
-        
     </>
   );
 } 

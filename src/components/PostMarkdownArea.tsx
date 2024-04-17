@@ -1,85 +1,36 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReactMarkdown from 'react-markdown'
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
-import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
+import Image from 'next/image';
 
 type Props = {
-    path: String
+    content: string
 }
 
-const PostMarkdownArea = ({path}:Props) => {
-    const [markdownContent, setMarkdownContent] = useState<string>('');
-
-    useEffect(() => {
-        fetch(`/data/posts/${path}.md`).then((res) => res.text()).then((text) => 
-            setMarkdownContent(text))
-    }, [path]);
-    
-
+const PostMarkdownArea = ({content}:Props) => {
+  console.log(content)
     return (
-        <ReactMarkdown 
-            children={markdownContent}
-            components={{
-                code({ className, children }) {
-                  const match = /language-(\w+)/.exec(className || "");
-                  return match ? (
-                    // 코드 (```)
-                    <SyntaxHighlighter
-                      style={nord}
-                      language={match[1]}
-                      PreTag="div"
-                    >
-                      {String(children)
-                        .replace(/\n$/, "")
-                        .replace(/\n&nbsp;\n/g, "")
-                        .replace(/\n&nbsp\n/g, "")}
-                    </SyntaxHighlighter>
-                  ) : (
-                    <SyntaxHighlighter
-                      style={nord}
-                      background="green"
-                      language="textile"
-                      PreTag="div"
-                    >
-                      {String(children).replace(/\n$/, "")}
-                    </SyntaxHighlighter>
-                  );
-                },
-                // 인용문 (>)
-                blockquote({ children, ...props }) {
-                  return (
-                    <blockquote
-                      style={{
-                        background: "#7afca19b",
-                        padding: "1px 15px",
-                        borderRadius: "10px",
-                      }}
-                      {...props}
-                    >
-                      {children}
-                    </blockquote>
-                  );
-                },
-                img({ ...props }) {
-                  return (
-                    <img
-                      style={{ maxWidth: "40vw" }}
-                      src={props.src?.replace("../../../../public/", "/")}
-                      alt="MarkdownRenderer__Image"
-                    />
-                  );
-                },
-                em({ children, ...props }) {
-                  return (
-                    <span style={{ fontStyle: "italic" }} {...props}>
-                      {children}
-                    </span>
-                  );
-                },
-              }}
-              remarkPlugins={[remarkGfm]} />
+      <ReactMarkdown className='prose lg:prose-xl max-w-none' remarkPlugins={[remarkGfm]} components={{
+        code(props) {
+          const { ref, children, className, node, ...rest } = props
+          const match = /language-(\w+)/.exec(className || '')
+          return match ? (
+            <SyntaxHighlighter language={match[1]} PreTag='div' {...rest} style={materialDark}>
+              {String(children).replace(/\n$/, '')}
+            </SyntaxHighlighter>
+          ) : (
+            <code {...rest} className={className}>
+              {children}
+            </code>
+          )
+        },
+        img: (image) => (<Image className='w-full max-h-60 object-cover' src={image.src || ''} alt={image.alt || ''} width={500} height={350} />)
+      }}>
+        {content}
+      </ReactMarkdown>
     );
 };
 

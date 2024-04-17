@@ -29,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={notoSansKr.className}>
+    <html lang="en" className={notoSansKr.className}>
+      <body className='flex flex-col w-full max-w-screen-2xl mx-auto'>
         <header className="py-2 px-4 flex justify-between align-center">
           <p className="font-bold text-2xl text-slate-800"><Link href='/'>Yuri's Blog✨</Link></p>
           <nav className="gap-x-3 flex text-slate-800">
@@ -40,7 +40,7 @@ export default function RootLayout({
             <Link href='/contact'>contact</Link>
           </nav>
         </header>
-        <main>{children}</main>
+        <main className='grow'>{children}</main>
         <div className="bg-blue-950 text-white text-xs text-center">© 2024 yuri. All Right Reserved.</div>
       </body>
     </html>
