@@ -7,7 +7,7 @@ import remarkGfm from "remark-gfm";
 import Image from 'next/image';
 
 type Props = {
-    content: string
+    content: string | undefined
 }
 
 const PostMarkdownArea = ({content}:Props) => {

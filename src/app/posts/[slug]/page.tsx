@@ -1,8 +1,8 @@
 // import { notFound, redirect } from 'next/navigation';
-import PostMarkdownArea from "@/components/PostMarkdownArea";
+import AdjacentPostCard from "@/components/AdjacentPostCard";
+import PostContent from "@/components/PostContent";
 import { getPostData } from "@/service/posts";
 import Image from "next/image";
-import { MdOutlineDateRange } from "react-icons/md";
 
 type Props = {
   params: {
@@ -18,21 +18,17 @@ export function generateMetadata({ params }: Props) {
 
 export default async function postsPage({ params: {slug} }: Props) {
   const post = await getPostData(slug);
+  const { title, path, next, prev } = post;
   
   return (
     <>
         <div className="p-6 rounded-md overflow-hidden">
-          <Image src={`/images/posts/${post.path}.png`} alt={post.title} width={300} height={300} className='w-full h-[300px] object-cover rounded-t-lg' />
-          <div className="p-4 bg-gray-100 rounded-b-lg">
-            <p className="text-right text-sm pt-4 flex justify-end items-center text-gray-500">
-              <MdOutlineDateRange className="text-gray-500" />
-              <span>{post.date}</span>
-            </p>
-            <p className="font-bold text-4xl pb-2">{post.title}</p>
-            <p className="text-gray-800">{post.description}</p>
-            <hr className="w-1/4 h-1 my-6 bg-blue-800" />
-            <PostMarkdownArea content={post.content} />
-          </div>
+          <Image src={`/images/posts/${path}.png`} alt={title} width={300} height={300} className='w-full h-[300px] object-cover rounded-t-lg' />
+          <PostContent post={post} />
+          <section className="flex shadow-md">
+            {prev && <AdjacentPostCard post={prev} type='prev' />}
+            {next && <AdjacentPostCard post={next} type='next' />}
+          </section>
         </div>
     </>
   );
