@@ -1,7 +1,7 @@
 import React from 'react';
 import PostBox from './PostBox';
 import { Post } from '../service/posts'
-import MultiCarousel from './multiCarousel';
+import MultiCarousel from './MultiCarousel';
 
 interface PostsProps {
     posts: Post[] | Post;

@@ -1,7 +1,8 @@
 // import { notFound, redirect } from 'next/navigation';
 import AdjacentPostCard from "@/components/AdjacentPostCard";
 import PostContent from "@/components/PostContent";
-import { getPostData } from "@/service/posts";
+import { getFeaturedPosts, getPostData } from "@/service/posts";
+import { Metadata } from "next";
 import Image from "next/image";
 
 type Props = {
@@ -10,9 +11,11 @@ type Props = {
   }
 }
 
-export function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params: {slug} }: Props): Promise<Metadata> {
+  const { title, description } = await getPostData(slug);
   return {
-    title: `포스트 제목: ${params.slug}`,
+    title,
+    description
   }
 }
 
@@ -35,10 +38,10 @@ export default async function postsPage({ params: {slug} }: Props) {
 } 
 
 // 미리 특정 경로의 정적 페이지를 만들고 싶다면
-// export async function generateStaticParams() {
-//   // 모든 제품의 페이지들을 미리 만들어 둘 수 있게 해줄거임(SSG)
-//   const products = await getProducts();
-//   return products.map(product => ({
-//     slug: product.id,
-//   }))
-// }
+export async function generateStaticParams() {
+  // 모든 제품의 페이지들을 미리 만들어 둘 수 있게 해줄거임(SSG)
+  const featuredPosts = await getFeaturedPosts(true)
+  return featuredPosts.map((post) => ({
+    slug: post.path,
+  }))
+}

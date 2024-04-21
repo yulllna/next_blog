@@ -1,6 +1,7 @@
 import path from 'path';
 // import { promises as fs } from 'fs';
 import { readFile } from 'fs/promises';
+import { cache } from 'react';
 
 export type Post = {
     title: string,
@@ -17,12 +18,16 @@ export type PostData = Post & {
     prev: Post | null 
 }
 
-export function getPosts(): Promise<Post[]> {
+export const getPosts = cache(async() => {
+    // 호출하는 인자의 id가 동일하다면 캐시된 값을 반환.
+    // 한 번 렌더링 하는 사이클에 한해서만 캐시를 해줌
+    console.log('get all posts')
+
     const filePath = path.join(process.cwd(), 'public/data', 'posts.json');
     return readFile(filePath, 'utf-8')
     .then<Post[]>(JSON.parse)
     .then((posts) => posts.sort((a, b) => (a.date > b.date ? -1 : 1)));
-}
+})
 
 export async function getFeaturedPosts(featured: boolean):Promise<Post[]> {
     const posts = await getPosts();

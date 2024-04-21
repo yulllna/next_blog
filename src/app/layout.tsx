@@ -19,8 +19,14 @@ const notoSansKr = Noto_Sans_KR({
 // });
 
 export const metadata: Metadata = {
-  title: "유리의 블로그",
+  title: {
+    default: "유리의 블로그",
+    template: '유리의 블로그 | %s'
+  },
   description: "유리의 개발 공부 블로그입니다.",
+  icons: {
+    icon: '/favicon.icon'
+  }
 };
 
 export default function RootLayout({
@@ -32,7 +38,7 @@ export default function RootLayout({
     <html lang="en" className={notoSansKr.className}>
       <body className='flex flex-col w-full max-w-screen-2xl mx-auto'>
         <header className="py-2 px-4 flex justify-between align-center">
-          <p className="font-bold text-2xl text-slate-800"><Link href='/'>Yuri's Blog✨</Link></p>
+          <p className="font-bold text-2xl text-slate-800"><Link href='/'>Yuri&apos;s Blog✨</Link></p>
           <nav className="gap-x-3 flex text-slate-800">
             <Link href='/'>home</Link>
             <Link href='/about'>about</Link>

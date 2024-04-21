@@ -1,5 +1,11 @@
 import React from 'react';
 import Introduce from '../../components/Introduce';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'About Me',
+    description: 'Yuri 커리어 소개'
+}
 
 function AboutPage() {
     const sectionTitle = 'font-bold text-xl p-2'
