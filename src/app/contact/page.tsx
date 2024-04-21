@@ -1,4 +1,5 @@
 'use client'
+import ContactForm from '@/components/ContactForm';
 import React, {useState} from 'react';
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
@@ -7,7 +8,7 @@ import { SiVelog } from "react-icons/si";
 // import { SendMailParam, mailSender } from '../../config/nodemailer'
 
 const ContactPage: React.FC = () => {
-    const inputStyle = 'px-1 mb-4 text-gray-800'
+    // const inputStyle = 'px-1 mb-4 text-gray-800'
 
     const [email, setEmail] = useState('');
     const [subject, setSubject] = useState('');
@@ -62,7 +63,7 @@ const ContactPage: React.FC = () => {
                 </div>
                 <p className='font-bold text-xl py-8'>Or Send me an email</p>
             </div>
-            <form id="mailForm" className='bg-blue-950 w-9/12 rounded-md text-white flex flex-col p-3 mx-auto' onSubmit={handleSubmit}>
+            {/* <form id="mailForm" className='bg-blue-950 w-9/12 rounded-md text-white flex flex-col p-3 mx-auto' onSubmit={handleSubmit}>
                 <label htmlFor="email" className='pb-2'>Your Email</label>
                 <input type="email" id='email' className={inputStyle} value={email} onChange={handleEmailChange} />
                 <label htmlFor="subject" className='pb-2'>Subject</label>
@@ -70,7 +71,8 @@ const ContactPage: React.FC = () => {
                 <label htmlFor="message" className='pb-2'>Message</label>
                 <textarea name="message" id="message" className={`${inputStyle} resize-none h-[200px]`} value={message} onChange={handleMessageChange}></textarea>
                 <button type="submit" form="mailForm" className='bg-orange-400 text-gray-800 rounded-sm'>submit</button>
-            </form>
+            </form> */}
+            <ContactForm />
         </div>
     );
 };
